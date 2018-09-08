@@ -9,7 +9,9 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class AppvarProvider {
-server = "http://localhost:1900"
+  host = "http://localhost"
+  port = "1900"
+  server = this.host+":"+this.port
   constructor(public http: HttpClient) {
     console.log('Hello AppvarProvider Provider');
   }

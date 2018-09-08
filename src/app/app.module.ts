@@ -12,13 +12,15 @@ import { ProductProvider } from '../providers/product/product';
 import { HttpClientModule } from '@angular/common/http';
 import { ChangePriceDialogPage } from '../pages/change-price-dialog/change-price-dialog';
 import { AppvarProvider } from '../providers/appvar/appvar';
+import { AppSettingPage } from '../pages/app-setting/app-setting';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    ChangePriceDialogPage
+    ChangePriceDialogPage,
+    AppSettingPage
   ],
   imports: [
     BrowserModule,
@@ -33,6 +35,7 @@ import { AppvarProvider } from '../providers/appvar/appvar';
     MyApp,
     HomePage,
     ListPage,
+    AppSettingPage,
     ChangePriceDialogPage
   ],
   providers: [
