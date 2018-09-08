@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ProductProvider } from '../../providers/product/product';
 
 @Component({
   selector: 'page-list',
@@ -9,8 +10,12 @@ export class ListPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  products
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private product: ProductProvider
+  ) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -26,6 +31,10 @@ export class ListPage {
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
+    this.product.getProducts(result => {
+      console.log("Result",result)
+      this.products = result
+    })
   }
 
   itemTapped(event, item) {
