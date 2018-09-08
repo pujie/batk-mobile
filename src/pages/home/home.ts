@@ -8,29 +8,31 @@ import { ProductProvider } from '../../providers/product/product';
 })
 export class HomePage {
   products
+  productArray
   constructor(
     public navCtrl: NavController,
     private product : ProductProvider
   ) {
     console.log("Hi Puji")
-    this.initializeItems()
-  }
-  initializeItems(){
     this.product.getProducts(result => {
       console.log("Result",result)
       this.products = result
     })
-
   }
   getItems(ev){
-    this.initializeItems()
-    const val = ev.target.value
-    console.log("Val",val)
-    if(val && val.trim() != ''){
-      this.products = this.products.filter((item) => {
-        console.log("Item",item)
-        return (item.name.toLowerCase().indexOf(val.toString().toLowerCase()) > - 1)
-      })
-    }
+    this.product.getProducts(result => {
+      console.log("Result",result)
+      this.products = result
+
+      const val = ev.target.value
+      console.log("Val",val)
+      if(val && val.trim() != ''){
+        this.products = this.products.filter((item) => {
+          console.log("Item",item)
+          return (item.name.toLowerCase().indexOf(val.toString().toLowerCase()) > - 1)
+        })
+      }
+    })
+
   }
 }
