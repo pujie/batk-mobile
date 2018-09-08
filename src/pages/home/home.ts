@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { ProductProvider } from '../../providers/product/product';
+import { ChangePriceDialogPage } from '../change-price-dialog/change-price-dialog';
 
 @Component({
   selector: 'page-home',
@@ -11,7 +12,8 @@ export class HomePage {
   productArray
   constructor(
     public navCtrl: NavController,
-    private product : ProductProvider
+    private product : ProductProvider,
+    private modalCtrl : ModalController
   ) {
     console.log("Hi Puji")
     this.product.getProducts(result => {
@@ -34,5 +36,10 @@ export class HomePage {
       }
     })
 
+  }
+  showChangeDialog(item){
+    console.log("Show Change DIalog",item)
+    const modal = this.modalCtrl.create(ChangePriceDialogPage,item)
+    modal.present()
   }
 }

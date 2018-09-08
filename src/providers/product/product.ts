@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
+import { AppvarProvider } from '../appvar/appvar';
 
 /*
   Generated class for the ProductProvider provider.
@@ -12,12 +13,13 @@ import { Observable } from 'rxjs'
 export class ProductProvider {
   obj : Observable<any>
   constructor(
-    public http: HttpClient
+    public http: HttpClient,
+    private appvar: AppvarProvider
   ) {
     console.log('Hello ProductProvider Provider');
   }
   getProducts(callback){
-    this.obj = this.http.get('http://localhost:1900/getproducts')
+    this.obj = this.http.get(this.appvar.server+'/getproducts')
     this.obj.subscribe(
       data => {
         console.log("getProducts",data)
@@ -25,6 +27,17 @@ export class ProductProvider {
       },
       err => {
         console.log("getProducts",err)
+        callback(err)
+      }
+    )
+  }
+  updateProduct(data,callback){
+    this.obj = this.http.post(this.appvar.server+'/updateproduct',data)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
         callback(err)
       }
     )

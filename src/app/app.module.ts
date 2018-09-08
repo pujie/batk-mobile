@@ -10,29 +10,37 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ProductProvider } from '../providers/product/product';
 import { HttpClientModule } from '@angular/common/http';
+import { ChangePriceDialogPage } from '../pages/change-price-dialog/change-price-dialog';
+import { AppvarProvider } from '../providers/appvar/appvar';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ChangePriceDialogPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+  ],
+  exports: [
+    ChangePriceDialogPage
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    ChangePriceDialogPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProductProvider
+    ProductProvider,
+    AppvarProvider
   ]
 })
 export class AppModule {}
