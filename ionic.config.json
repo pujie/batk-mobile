@@ -4,9 +4,11 @@
     "cordova": {}
   },
   "type": "ionic-angular",
-  "pro_id": "e5d0300c",
-  "proxies":[{
-    "path":"/",
-    "proxyUrl":"http://localhost:1900/updateproduct"
-  }]
+  "pro_id": "batk-mobile",
+  "proxies": [
+    {
+      "path": "/updateproduct",
+      "proxyUrl": "http://belanjaatk.co.id/jsons/updateproduct"
+    }
+  ]
 }
