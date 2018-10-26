@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 import { AppvarProvider } from '../appvar/appvar';
@@ -9,9 +9,15 @@ import { AppvarProvider } from '../appvar/appvar';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+
 @Injectable()
 export class ProductProvider {
   obj : Observable<any>
+  httpoptions = {
+    headers:new HttpHeaders({
+      'Content-Type':'application/json'
+    })
+  }
   constructor(
     public http: HttpClient,
     private appvar: AppvarProvider
@@ -19,7 +25,7 @@ export class ProductProvider {
     console.log('Hello ProductProvider Provider');
   }
   getProducts(callback){
-    this.obj = this.http.get(this.appvar.server+'/getproducts')
+    this.obj = this.http.get('http://belanjaatk.co.id/jsons/index')
     this.obj.subscribe(
       data => {
         console.log("getProducts",data)
@@ -31,10 +37,19 @@ export class ProductProvider {
       }
     )
   }
-  updateProduct(data,callback){
-    this.obj = this.http.post(this.appvar.server+'/updateproduct',data)
+  updateProduct(paramdata,callback){
+    console.log("UPdate Data",paramdata)
+    let realdata = {
+      id:paramdata.id,
+      name:paramdata.name,
+      sellingprice:paramdata.sellingprice
+    }
+    this.obj = this.http.post('/updateproduct',realdata, {
+      headers: { 'Content-Type': 'application/json' }
+  })
     this.obj.subscribe(
       data => {
+        console.log("Data Received",data)
         callback(data)
       },
       err => {
